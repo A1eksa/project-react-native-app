@@ -1,63 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ActivityIndicator, Text } from 'react-native';
-import styled from 'styled-components/native';
+import {
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
 import { URL } from '../URL';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const SpaceView = styled.View`
-  height: 50px;
-`;
-
-const ViewWrapper = styled.View`
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  position: absolute;
-`;
-
-const QuoteView = styled.View`
-  position: relative;
-  border: solid 2px red;
-  top: 50px;
-  padding: 45px 20px 45px 20px;
-  margin: 5px;
-  align-items: center;
-`;
-
-const QuoteText = styled.Text`
-  font-weight: 700;
-  font-size: 24px;
-  padding: 35px;
-  color: black;
-`;
-const AuthorText = styled.Text`
-  padding: 50px;
-`;
-
-const MainView = styled.View`
-  display: flex;
-  position: fixed;
-  margin: 0 auto;
-  align-items: center;
-  top: 600px;
-`;
-
-const APIButton = styled.TouchableOpacity`
-  background-color: #333333;
-  height: 80px;
-  margin-vertical:40px
-  color: whitesmoke;
-  width: 400px;
-  border-radius: 8px;
-`;
-const ButtonText = styled.Text`
-  font-size: 23px;
-  font-weight: 500;
-  text-align: center;
-  padding-top: 10px;
-  color: whitesmoke;
-  padding-top: 25px;
-`;
+const styles = StyleSheet.create({
+  button: {
+    top: 10,
+    marginLeft: 2,
+    width: 80,
+    backgroundColor: '#333333',
+    height: 80,
+    marginVertical: 40,
+    color: 'whitesmoke',
+    width: 400,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#9BCBCB',
+    textAlign: 'center',
+    fontSize: 23,
+    fontWeight: '500',
+    marginTop: 20,
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    margin: 0,
+    position: 'absolute',
+    backgroundColor: '#f3f3f3',
+  },
+  main: {
+    bottom: 10,
+    position: 'relative',
+  },
+  quoteView: {
+    position: 'relative',
+    top: 50,
+    paddingTop: 45,
+    paddingRight: 20,
+    paddingBottom: 45,
+    paddingLeft: 20,
+    margin: 5,
+    alignItems: 'center',
+    height: 470,
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    margin: 0,
+    position: 'absolute',
+  },
+  quoteText: {
+    fontWeight: '700',
+    fontSize: 21,
+    padding: 35,
+    color: 'black',
+  },
+  authorText: {
+    padding: 50,
+  },
+});
 
 const QuotesApi = () => {
   const [quote, setQuote] = useState({});
@@ -79,27 +88,24 @@ const QuotesApi = () => {
   }
   return (
     <>
-      <ViewWrapper>
-        <SpaceView />
+      <SafeAreaView style={styles.container}>
+        <View style={styles.spaceView} />
         <MaterialCommunityIcons
           name='thought-bubble-outline'
           size={30}
           color='black'
-          bottom='100'
         />
-        <QuoteView>
-          <QuoteText>{quote.content}</QuoteText>
-          <View>Author:{quote.author}</View>
-        </QuoteView>
+        <View style={styles.quoteView}>
+          <Text style={styles.quoteText}>{quote.content}</Text>
+          <Text style={styles.authorText}>Author:{quote.author}</Text>
+        </View>
 
-        <MainView>
-          <APIButton onPress={generateQuote}>
-            <ButtonText>
-              <Text>Give me quotes</Text>
-            </ButtonText>
-          </APIButton>
-        </MainView>
-      </ViewWrapper>
+        <View styles={styles.main}>
+          <TouchableOpacity style={styles.button} onPress={generateQuote}>
+            <Text styles={styles.buttonText}>Give me quotes</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     </>
   );
 };

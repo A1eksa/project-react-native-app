@@ -1,55 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+} from 'react-native';
 import styled from 'styled-components/native';
 import { Accelerometer } from 'expo-sensors';
 import BackgroundImage from './BackgroundImage';
 
-const OverView = styled.View`
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  position: absolute;
-`;
-
-const ChangeColour = styled.TouchableOpacity`
-  top: 30px;
-  margin-left: 7px;
-  width: 90%;
-  background-color: #333333;
-  height: 80px;
-  margin-vertical:40px
-  color: whitesmoke;
-  width: 400px;
-  border-radius: 8px;
-`;
-
-const ButtonContainer = styled.View`
-  width: 400px;
-  top: 300px;
-  display: flex;
-  flex-direction: row;
-`;
-
-const ColorText = styled.Text`
-  top: 100px;
-  padding-left: 55px;
-  position: relative;
-  font-size: 21px;
-  text-transform: uppercase;
-  font-weight: 400;
-`;
-const containerView = styled.View`
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-`;
-const ButtonText = styled.Text`
-  color: whitesmoke;
-  text-align: center;
-  font-size: 23px;
-  font-weight: 500;
-  margin-top: 20px;
-`;
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    alignItems: 'center',
+    margin: 0,
+    position: 'absolute',
+  },
+  button: {
+    top: 10,
+    marginLeft: 2,
+    width: 80,
+    backgroundColor: '#333333',
+    height: 80,
+    marginVertical: 40,
+    color: 'whitesmoke',
+    width: 400,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#9BCBCB',
+    textAlign: 'center',
+    fontSize: 23,
+    fontWeight: '500',
+    marginTop: 20,
+  },
+  buttonView: {
+    width: 400,
+    top: 300,
+    flex: 1,
+    flexDirection: 'row',
+  },
+  text: {
+    top: 100,
+    paddingLeft: 55,
+    position: 'relative',
+    fontSize: 21,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  },
+});
 
 const Colour = () => {
   const [colour, setColour] = useState('#ffffff');
@@ -105,7 +105,7 @@ const Colour = () => {
   return (
     <>
       <BackgroundImage />
-      <OverView>
+      <SafeAreaView style={styles.view}>
         <View
           style={{
             backgroundColor: `${colour}`,
@@ -115,14 +115,14 @@ const Colour = () => {
             borderRadius: 100,
           }}
         >
-          <ColorText>{colour}</ColorText>
+          <Text style={styles.text}>{colour}</Text>
         </View>
-        <ButtonContainer>
-          <ChangeColour onPress={colourCreator}>
-            <ButtonText>Press or Shake</ButtonText>
-          </ChangeColour>
-        </ButtonContainer>
-      </OverView>
+        <View style={styles.buttonView}>
+          <TouchableOpacity style={styles.button} onPress={colourCreator}>
+            <Text style={styles.buttonText}>Press or Shake</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     </>
   );
 };

@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 const BackgroundImage = () => {
   return (
     <ImageBackground
-      source={require('./pigments.jpg')}
+      source={require('./gradient.jpg')}
       style={{ width: '100%', height: '100%' }}
     ></ImageBackground>
   );
