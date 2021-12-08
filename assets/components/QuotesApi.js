@@ -100,9 +100,9 @@ const QuotesApi = () => {
           <Text style={styles.authorText}>Author:{quote.author}</Text>
         </View>
 
-        <View styles={styles.main}>
+        <View style={styles.main}>
           <TouchableOpacity style={styles.button} onPress={generateQuote}>
-            <Text styles={styles.buttonText}>Give me quotes</Text>
+            <Text style={styles.buttonText}>Give me quotes</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
